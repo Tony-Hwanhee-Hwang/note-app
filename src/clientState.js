@@ -2,7 +2,14 @@ import { NOTE_FRAGMENT } from "./fragments";
 import { GET_NOTES } from "./queries";
 
 export const defaults = {
-	notes: [],
+	notes: [
+		{
+			__typename: "Note",
+			id: 1,
+			title: "Sample",
+			content: "This is Sample content for testing",
+		},
+	],
 };
 export const typeDefs = [
 	`
