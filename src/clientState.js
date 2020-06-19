@@ -17,7 +17,8 @@ export const typeDefs = [
         }
         type Mutation{
             createNote(title: String!, content: String):Note!
-            editNote(id: Int!, title: String!, content: String):Note!
+			editNote(id: Int!, title: String!, content: String):Note!
+			deleteNote(id: Int!):Boolean!
         }
         type Note{
             id: Int!
@@ -63,6 +64,19 @@ export const resolvers = {
 			});
 			saveNotes(cache);
 			return updateData;
+		},
+		deleteNote: (_, { id }, { cache, getCacheKey }) => {
+			const { notes } = cache.readQuery({ query: GET_NOTES });
+
+			const deletedNotes = notes.filter((note) => note.id !== parseInt(id));
+			cache.writeQuery({
+				query: GET_NOTES,
+				data: {
+					notes: deletedNotes,
+				},
+			});
+			saveNotes(cache);
+			return true;
 		},
 	},
 };

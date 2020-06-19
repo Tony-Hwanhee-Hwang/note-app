@@ -29,8 +29,6 @@ export default (props) => {
 			const {
 				note: { id },
 			} = data;
-			console.log(id, title, content);
-			console.log(editNote);
 			editNote({ variables: { id, title, content } });
 			push("/");
 		}
