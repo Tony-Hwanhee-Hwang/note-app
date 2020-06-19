@@ -14,7 +14,11 @@ export const saveNotes = (cache) => {
 export const loadNotes = () => {
 	try {
 		const notes = localStorage.getItem("notes");
-		const parsedNotes = JSON.parse(notes);
+		let parsedNotes = JSON.parse(notes);
+
+		//if notes not exists in localstorage, make default data
+		if (!parsedNotes) parsedNotes = [{ id: 0, title: "", content: "", __typename: "Note" }];
+
 		return parsedNotes;
 	} catch (error) {
 		console.log(error);

@@ -76,7 +76,7 @@ export default () => {
 			<Notes>
 				{loading
 					? null
-					: data?.notes.map((note) => {
+					: data?.notes?.map((note) => {
 							if (!note) return null;
 							return (
 								<Link to={`/note/${note.id}`} key={note.id}>
